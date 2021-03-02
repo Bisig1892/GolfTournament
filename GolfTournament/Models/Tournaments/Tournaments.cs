@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GolfTournament.Models
 {
-    public class Tournament
+    public class Tournaments
     {
         [Key]
         public int TournamentId { get; set; }

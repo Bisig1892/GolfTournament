@@ -13,6 +13,6 @@ namespace GolfTournament.Data
             : base(options)
         {
         }
-        public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<Tournaments> Tournaments { get; set; }
     }
 }
