@@ -11,12 +11,12 @@ namespace GolfTournament.Models
         [Key]
         public int TournamentId { get; set; }
         /// <summary>
-        /// Id of the course that is being used for the tournament
+        /// Id of the course being played
         /// </summary>
-        public int CourseId { get; set; }
-        /// <summary>
-        /// Date the tournament is being played 
-        /// </summary>
+        public Course Course { get; set; }
+        ///// <summary>
+        ///// Date the tournament is being played 
+        ///// </summary>
         public DateTime ScheduledDate { get; set; }
     }
 }
