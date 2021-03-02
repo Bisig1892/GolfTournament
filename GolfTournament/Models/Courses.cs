@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GolfTournament.Models
 {
-    public class Course
+    public class Courses
     {
         [Key]
         public int CourseId { get; set; }
@@ -22,5 +22,7 @@ namespace GolfTournament.Models
         public string City { get; set; }
         public string State { get; set; }
         public int ZIP { get; set; }
+
+        public List<Holes> Holes { get; set; }
     }
 }
