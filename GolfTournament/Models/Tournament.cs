@@ -13,7 +13,7 @@ namespace GolfTournament.Models
         /// <summary>
         /// Id of the course being played
         /// </summary>
-        public Course Course { get; set; }
+        public Courses Course { get; set; }
         ///// <summary>
         ///// Date the tournament is being played 
         ///// </summary>
