@@ -22,6 +22,9 @@ namespace GolfTournament.Models
         /// calculated average age of the team members used to see if team qualifies for senior flight
         /// </summary>
         public double AvgAge { get; set; }
-
+        /// <summary>
+        /// This is the total score for the tournament. 
+        /// </summary>
+        public int TotalScore { get; set; }
     }
 }
