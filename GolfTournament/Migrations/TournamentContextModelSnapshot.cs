@@ -88,6 +88,9 @@ namespace GolfTournament.Migrations
                     b.Property<DateTime>("ScheduledDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("flights")
+                        .HasColumnType("int");
+
                     b.HasKey("TournamentId");
 
                     b.HasIndex("CourseId");
