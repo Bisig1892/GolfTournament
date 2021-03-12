@@ -23,5 +23,7 @@ namespace GolfTournament.Models
         /// </summary>
         public double AvgAge { get; set; }
 
+        public int TotalScore { get; set; }
+
     }
 }
