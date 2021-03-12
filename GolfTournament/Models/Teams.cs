@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GolfTournament.Models.TeamInfomation
+namespace GolfTournament.Models
 {
     public class Teams
     {
         [Key]
-        public int Id { get; set; }
+        public int TeamId { get; set; }
         /// <summary>
         /// id of the tournament the team is playing in
         /// </summary>

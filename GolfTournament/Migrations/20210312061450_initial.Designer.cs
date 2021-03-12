@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GolfTournament.Migrations
 {
     [DbContext(typeof(TournamentContext))]
-    [Migration("20210302084913_initial")]
+    [Migration("20210312061450_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace GolfTournament.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("GolfTournament.Models.Course", b =>
+            modelBuilder.Entity("GolfTournament.Models.Courses", b =>
                 {
                     b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
@@ -48,10 +48,36 @@ namespace GolfTournament.Migrations
 
                     b.HasKey("CourseId");
 
-                    b.ToTable("Course");
+                    b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("GolfTournament.Models.Tournament", b =>
+            modelBuilder.Entity("GolfTournament.Models.Holes", b =>
+                {
+                    b.Property<int>("HoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Handicap")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Par")
+                        .HasColumnType("int");
+
+                    b.HasKey("HoleId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Holes");
+                });
+
+            modelBuilder.Entity("GolfTournament.Models.Tournaments", b =>
                 {
                     b.Property<int>("TournamentId")
                         .ValueGeneratedOnAdd()
@@ -63,6 +89,9 @@ namespace GolfTournament.Migrations
 
                     b.Property<DateTime>("ScheduledDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("flights")
+                        .HasColumnType("int");
 
                     b.HasKey("TournamentId");
 
@@ -271,9 +300,16 @@ namespace GolfTournament.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("GolfTournament.Models.Tournament", b =>
+            modelBuilder.Entity("GolfTournament.Models.Holes", b =>
                 {
-                    b.HasOne("GolfTournament.Models.Course", "Course")
+                    b.HasOne("GolfTournament.Models.Courses", "Course")
+                        .WithMany("Holes")
+                        .HasForeignKey("CourseId");
+                });
+
+            modelBuilder.Entity("GolfTournament.Models.Tournaments", b =>
+                {
+                    b.HasOne("GolfTournament.Models.Courses", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId");
                 });

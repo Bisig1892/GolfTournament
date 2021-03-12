@@ -47,7 +47,7 @@ namespace GolfTournament.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Course",
+                name: "Courses",
                 columns: table => new
                 {
                     CourseId = table.Column<int>(nullable: false)
@@ -61,7 +61,7 @@ namespace GolfTournament.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Course", x => x.CourseId);
+                    table.PrimaryKey("PK_Courses", x => x.CourseId);
                 });
 
             migrationBuilder.CreateTable(
@@ -171,21 +171,44 @@ namespace GolfTournament.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Holes",
+                columns: table => new
+                {
+                    HoleId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Number = table.Column<int>(nullable: false),
+                    Par = table.Column<int>(nullable: false),
+                    Handicap = table.Column<int>(nullable: false),
+                    CourseId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Holes", x => x.HoleId);
+                    table.ForeignKey(
+                        name: "FK_Holes_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "CourseId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tournaments",
                 columns: table => new
                 {
                     TournamentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CourseId = table.Column<int>(nullable: true),
-                    ScheduledDate = table.Column<DateTime>(nullable: false)
+                    ScheduledDate = table.Column<DateTime>(nullable: false),
+                    flights = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tournaments", x => x.TournamentId);
                     table.ForeignKey(
-                        name: "FK_Tournaments_Course_CourseId",
+                        name: "FK_Tournaments_Courses_CourseId",
                         column: x => x.CourseId,
-                        principalTable: "Course",
+                        principalTable: "Courses",
                         principalColumn: "CourseId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -230,6 +253,11 @@ namespace GolfTournament.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Holes_CourseId",
+                table: "Holes",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tournaments_CourseId",
                 table: "Tournaments",
                 column: "CourseId");
@@ -253,6 +281,9 @@ namespace GolfTournament.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Holes");
+
+            migrationBuilder.DropTable(
                 name: "Tournaments");
 
             migrationBuilder.DropTable(
@@ -262,7 +293,7 @@ namespace GolfTournament.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Course");
+                name: "Courses");
         }
     }
 }
